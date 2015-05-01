@@ -51,7 +51,7 @@ namespace Kontur.Courses.Testing.Patterns.Specifications
 
         [TestCase("_some __text__ is here_", Result = "<em>some <strong>text</strong> is here</em>")]
         [TestCase("_it __is__ it!_", Result = "<em>it <strong>is</strong> it!</em>")]
-        [TestCase("_i __t __is__ it!_", Result = "<em>i<strong>t <strong>is</strong> it!</em>")]
+        [TestCase("_i __t __is__ it!_", Result = "<em>i <strong>t __is</strong> it!</em>")]
         public string strong_in_em(string input)
         {
             return md.Render(input);
