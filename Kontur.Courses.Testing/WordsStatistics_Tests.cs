@@ -44,5 +44,53 @@ namespace Kontur.Courses.Testing
 			stat.AddWord("world");
 			CollectionAssert.AreEqual(new[] { Tuple.Create(2, "world"), Tuple.Create(1, "hello") }, stat.GetStatistics());
 		}
+
+	    [Test]
+	    public void test_more_than_ten()
+	    {
+	        stat.AddWord("aAaAbBasdsddsad");
+            CollectionAssert.AreEqual(new[] { Tuple.Create(1, "aaaabbasds")}, stat.GetStatistics());
+	    }
+        [Test]
+        public void test_frequency()
+        {
+            stat.AddWord("hello");
+            stat.AddWord("hello");
+            stat.AddWord("ololo");
+            stat.AddWord("lol");
+            stat.AddWord("kontur");
+            stat.AddWord("kontur");
+            stat.AddWord("Kontur");
+            stat.AddWord("kontur");
+            CollectionAssert.AreEqual(new[] { Tuple.Create(4, "kontur"), 
+                Tuple.Create(2, "hello"),Tuple.Create(1, "lol"),
+                Tuple.Create(1, "ololo") }, stat.GetStatistics());
+        }
+
+        [Test]
+	    public void words_with_len_11()
+	    {
+	        for (var i = 0; i < 10000; i++)
+	        {
+	            stat.AddWord("aaaaaaaaaaC");
+	        }
+//            stat.AddWord("b");
+//            stat.AddWord("b");
+//            stat.AddWord("C");
+//            stat.AddWord("a");
+//            stat.AddWord("A");
+//            stat.AddWord("B");
+            CollectionAssert.AreEqual(new[] { Tuple.Create(10000, "aaaaaaaaaa") }, stat.GetStatistics());
+	    }
+
+	    [Test]
+	    public void word_with_zero_len()
+	    {
+	        stat.AddWord("Hell");
+
+	        stat.AddWord("");
+            CollectionAssert.AreEqual(new[] {Tuple.Create(1, "hell")}, stat.GetStatistics());
+	    }
+
 	}
 }
