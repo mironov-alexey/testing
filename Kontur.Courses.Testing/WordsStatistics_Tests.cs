@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using Kontur.Courses.Testing.Implementations;
@@ -138,6 +139,7 @@ namespace Kontur.Courses.Testing
                     if (rand.NextDouble() > 0.5)
                         stat.AddWord(j.ToString());
             var statistics = stat.GetStatistics();
+            var res = statistics.ToList();
             var expected = statistics.OrderByDescending(kv => kv.Item1).ThenBy(kv => kv.Item2).Select(kv => Tuple.Create(kv.Item1, kv.Item2));
             CollectionAssert.AreEqual(statistics, expected);
         }
